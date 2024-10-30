@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
       <h2 class="fw-bold text-body-emphasis">Effortlessly Manage Your Blog with Our Awesome Features</h2>
       <p class="text-body-secondary">We understand that running a successful blog requires more than just great writing.  That's why we've built a platform designed to streamline your workflow and free up your time to focus on what matters most: creating engaging content. Our intuitive interface simplifies complex tasks, making blog management efficient and enjoyable.  We've integrated powerful tools to handle everything from scheduling posts to analyzing your audience engagement, all in one convenient location. Ready to get started?</p>
 
-      <a href="#" class="btn btn-primary btn-lg">View Blogs</a>
+      <a href="#" class="btn btn-primary btn-lg">Mithraa</a>
       </div>
 
       <div class="col">
