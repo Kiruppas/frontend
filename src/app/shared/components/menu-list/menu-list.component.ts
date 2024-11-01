@@ -19,6 +19,6 @@ export class MenuListComponent {
     { label: 'Registration', link: '/registration', exact: false },
     { label: 'Blogs', link: '/blogs', exact: false },
     { label: 'About Us', link: '/about', exact: false },
-    { label: 'My Profile', link: '/my-profile', exact: false },
+    { label: 'Authors', link: '/authors', exact: false },
   ];
 }
