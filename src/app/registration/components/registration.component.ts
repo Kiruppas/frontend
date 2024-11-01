@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { RegistrationService } from '../service/registration.service';
+import { User } from '../interface/user';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule, HttpClientModule ],
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
   templateUrl: './registration.component.html',
   styles: ``
 })
@@ -19,60 +20,45 @@ export class RegistrationComponent {
   isSaved = false;
   registrationSuccess = false;
   registrationError = '';
-  userService: any;
-  
+  // toastr = inject(ToastrService);
 
-  constructor(/*private toastr: ToastrService*/ /*private registraionService: RegistrationService*/)  {
+
+  constructor(private registrationService: RegistrationService, private toastr: ToastrService) {
     this.addUserForm = new FormGroup({
-      name: new FormControl('', Validators.required), 
+      username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
     });
   }
-
-  handleAddUser(){
+  handleAddUser() {
     if (this.addUserForm.valid) {
-    console.log(this.addUserForm.value);
-    // TOASTR
-    // send the data to the service
-    // this.employeesService.addEmployee(this.addUserForm.value).subscribe((response: any) => {
-    //   console.log(response);
-    //   this.isSaved=true;
-    // })
-    // this.simulateServiceCall();
-    // } else {
-    //   this.toastr.error('Please fill out the form correctly.', 'Error'); //Show error if form is invalid
-    // }
+      const user: User = this.addUserForm.value; // Get the form data
+      this.registrationService.registerUser(user).subscribe({
+        next: (response: any) => {
+          this.registrationSuccess = true;
+          this.registrationError = '';
+          console.log('Registration successful:', response);
+          this.toastr.success('User added successfully!', 'Success');
+          this.resetForm();
 
-    //  INTERGRATION
-    // const user = this.addUserForm.value;
-    //   this.userService.registerUser(user).subscribe({
-    //     next: (response: any) => {
-    //       this.registrationSuccess = true;
-    //       this.registrationError = '';
-    //       console.log('Registration successful:', response);
-    //       // Optionally, redirect to a login page or show a success message.
-    //     },
-    //     error: (error: { error: { message: string; }; }) => {
-    //       this.registrationSuccess = false;
-    //       this.registrationError = error.error.message || 'Registration failed. Please try again.';
-    //       console.error('Registration error:', error);
-    //     }
-    //   });
-    // }
+        },
+        error: (error: any) => {
+          this.registrationSuccess = false;
+          this.registrationError = error.error?.message || 'Registration failed. Please try again.';
+          this.toastr.error(this.registrationError, 'Error');
+          console.error('Registration error:', error);
+        }
+      });
+    }
   }
 
-  // TOASTR
-  // simulateServiceCall() {
-  //   // Replace this with your actual service call
-  //   setTimeout(() => {
-  //     this.isSaved = true;
-  //     this.toastr.success('User registered successfully!', 'Success');
-  //   }, 1000); // Simulate a 1-second delay
-  // }
+  resetForm() {
+    this.addUserForm.reset(); // Reset the form to its initial state
+    this.registrationSuccess = false; //Reset success flag
+    this.registrationError = '';
+  }
+}
 
-  
-}
-}
+
 
 
