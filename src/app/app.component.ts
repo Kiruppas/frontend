@@ -8,13 +8,14 @@ import { BlogListComponent } from './blogs/components/blog-list/blog-list.compon
 import { BlogDetailsComponent } from './blogs/components/blog-details/blog-details.component';
 import { AboutComponent } from './about/about.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, MenuListComponent, FooterComponent, HomeComponent,BlogListComponent,BlogDetailsComponent,AboutComponent,MyProfileComponent, 
-  ],
+  ToastrModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -13,14 +13,14 @@
       <br><br><br><br><br>
       <form class="col-md-6 offset-md-3" [formGroup]="addUserForm" (ngSubmit)="handleAddUser()">
         <div class="form-group row mb-3">
-          <label for="nameInput" class="col-sm-2 col-form-label">Name</label>
+          <label for="usernameInput" class="col-sm-2 col-form-label">Name</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="nameInput" placeholder="Enter Name" formControlName="name"
+            <input type="text" class="form-control" id="usernameInput" placeholder="Enter Name" formControlName="username"
               [ngClass]="{
-                  'is-invalid': addUserForm.get('name')?.touched && addUserForm.get('name')?.invalid
+                  'is-invalid': addUserForm.get('username')?.touched && addUserForm.get('username')?.invalid
                 }" />
             <div class="invalid-feedback">
-              <div id="nameRequired">Name is required</div>
+              <div id="usernameRequired">userName is required</div>
             </div>
           </div>
         </div>
