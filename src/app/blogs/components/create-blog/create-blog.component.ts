@@ -1,28 +1,50 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BlogService } from '../../service/blogs.service';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-blog',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
   templateUrl: './create-blog.component.html',
-  styles: `
-    
-  `
+  styles: ``
 })
 export class CreateBlogComponent {
-  blogList: FormGroup;
-  categories = ['TECHNOLOGY', 'TRAVEL', 'FOOD', 'SPORTS', 'POLITICS']; // Define categories
+  userId: any;
+  addBlogForm: FormGroup;
+  //isSaved = false;
+  categories = ['TECHNOLOGY', 'TRAVEL', 'FOOD', 'SPORTS', 'POLITICS'];
 
-  constructor(private fb: FormBuilder) {
-    this.blogList = this.fb.group({
-      title: ['', Validators.required],
-      category: ['', Validators.required],
-      content: ['', [Validators.required, Validators.minLength(10)]]
+  constructor(private blogService: BlogService, private route: ActivatedRoute, private toastr: ToastrService) {
+    // Reading the URL param
+    this.userId = this.route.snapshot.paramMap.get('userId');
+
+    this.addBlogForm = new FormGroup({
+      title: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      category: new FormControl('', Validators.required),
+      content: new FormControl('', [Validators.required, Validators.minLength(5)])
     });
+  }
 
+  handleAddBlog() {
+    console.log(this.addBlogForm);
 
+    this.blogService.addBlog(this.addBlogForm.value, this.userId)
+      .subscribe((Response: any) => {
+        this.toastr.success('Blog added successfully!', 'Success');
+        this.resetForm();
+      });
+  }
+
+  resetForm() {
+    this.addBlogForm.reset();
   }
 }

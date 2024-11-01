@@ -14,9 +14,7 @@ export const routes: Routes = [
     { path: 'registration', component: RegistrationComponent, title:"Registration"},
     { path: 'blogs' ,children:[
         { path: '', component: BlogListComponent, title:"BlogList"},
-        { path: 'create-blog', component:CreateBlogComponent, title:"Create Blog"}
-        // { path: 'blog/:id', component: BlogDetailComponent }
-
+        { path: ':userId', component:CreateBlogComponent, title:"Create Blog"}
     ]},
     { path: 'about', component:AboutComponent, title:"About Us"},
     { path: 'my-profile', component:MyProfileComponent, title:"My Profile"}
