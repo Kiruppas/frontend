@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { AuthorsService } from '../../service/authors.service';
+import { AuthorsService } from '../../service/authors/authors.service';
 
 @Component({
   selector: 'app-author-details',
@@ -12,15 +12,15 @@ import { AuthorsService } from '../../service/authors.service';
   styles: ``
 })
 export class AuthorDetailsComponent {
-  authorId: any;
+  userId: any;
   author: any;
 
   constructor(private authorService: AuthorsService, private route: ActivatedRoute) {
-    this.authorId = this.route.snapshot.paramMap.get('userId');
+    this.userId = this.route.snapshot.paramMap.get('userId');
   }
 
   ngOnInit(): void {
-    this.authorService.getAuthorById(this.authorId)
+    this.authorService.getAuthorById(this.userId)
       .subscribe((response: any) => {
         this.author = response;
       })

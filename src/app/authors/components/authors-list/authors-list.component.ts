@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IAuthor } from '../../models/iauthor';
-import { AuthorsService } from '../../service/authors.service';
+import { AuthorsService } from '../../service/authors/authors.service';
 
 @Component({
   selector: 'app-authors',
