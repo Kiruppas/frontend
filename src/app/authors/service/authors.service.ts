@@ -16,13 +16,7 @@ export class AuthorsService {
     return this.http.get<IAuthor[]>(this.apiUrl);
   }
 
-  addAuthor(formData: any) {
-    console.log(formData);
-    return this.http.post(this.apiUrl, formData);
-  }
-
-  getAuthorById(id: any) {
-    console.log('Inside getEmployeeById');
-    return this.http.get(`${this.apiUrl}/${id}`);
+  getAuthorById(userId: any) {
+    return this.http.get(`${this.apiUrl}/${userId}`);
   }
 }

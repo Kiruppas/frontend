@@ -5,7 +5,8 @@ import { BlogListComponent } from './blogs/components/blog-list/blog-list.compon
 import { CreateBlogComponent } from './blogs/components/create-blog/create-blog.component';
 import { Component } from '@angular/core';
 import { AboutComponent } from './about/about.component';
-import { AuthorsComponent } from './authors/authors.component';
+import { AuthorsComponent } from './authors/components/authors-list/authors-list.component';
+import { AuthorDetailsComponent } from './authors/components/author-details/author-details.component';
 
 
 // config the routes
@@ -17,6 +18,8 @@ export const routes: Routes = [
         { path: ':userId', component:CreateBlogComponent, title:"Create Blog"}
     ]},
     { path: 'about', component:AboutComponent, title:"About Us"},
-    { path: 'authors', component:AuthorsComponent, title:"Authors"}
-    
+    { path: 'authors', children:[
+        { path: '', component:AuthorsComponent, title:"Authors"},
+        { path: ':userId', component:AuthorDetailsComponent, title:"Authors Details"}
+    ]}
 ];

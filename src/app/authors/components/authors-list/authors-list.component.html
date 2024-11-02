@@ -3,7 +3,10 @@
         <div class="col-sm-3 mb-2" *ngFor="let author of authors">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title" >{{author.username}}
+                    <h5 class="card-title">
+                        <a style=" color: black; text-decoration: none;" routerLink="/authors/{{author.userId}}">
+                            {{author.username}}
+                        </a>
                     </h5>
                     <p class="card-text">Email: {{author.email}}</p>
                 </div>

@@ -7,9 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { BlogListComponent } from './blogs/components/blog-list/blog-list.component';
 import { BlogDetailsComponent } from './blogs/components/blog-details/blog-details.component';
 import { AboutComponent } from './about/about.component';
-
 import { ToastrModule } from 'ngx-toastr';
-import { AuthorsComponent } from './authors/authors.component';
+import { AuthorsComponent } from './authors/components/authors-list/authors-list.component';
+
 
 
 @Component({
