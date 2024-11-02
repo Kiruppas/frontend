@@ -16,16 +16,16 @@ export class AuthorsService {
     return this.http.get<IAuthor[]>(this.apiUrl);
   }
 
-<<<<<<< Updated upstream
   addAuthor(formData: any) {
     console.log(formData);
     return this.http.post(this.apiUrl, formData);
   }
 
-  getAuthorById(id: any) {
-    console.log('Inside getEmployeeById');
-    return this.http.get(`${this.apiUrl}/${id}`);
-=======
+  getAuthorById(userId: number): Observable<IAuthor> {
+    return this.http.get<IAuthor>(`${this.apiUrl}/${userId}`);
+  }
+  
+
   updateAuthor(author: Partial<IAuthor>): Observable<IAuthor | null> { // Partial<IAuthor> object contains only the username and email
     const url = `${this.apiUrl}/edit/${author.userId}`;
     return new Observable(observer => {
@@ -36,10 +36,5 @@ export class AuthorsService {
         }
       });
     });
-  }
-
-  getAuthorById(userId: number): Observable<IAuthor> {
-    return this.http.get<IAuthor>(`${this.apiUrl}/${userId}`);
->>>>>>> Stashed changes
   }
 }

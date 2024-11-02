@@ -14,7 +14,8 @@ import { Observable, of } from 'rxjs';
   templateUrl: './update-author-details.component.html',
   styles: ``
 })
-export class UpdateAuthorDetailsComponent{
+export class UpdateAuthorDetailsComponent implements OnInit{
+
   updateUserForm: FormGroup;
   authorID!: any;
   isSaved = false;

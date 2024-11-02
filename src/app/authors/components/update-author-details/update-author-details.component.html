@@ -1,47 +1,47 @@
 <div class="container" style="margin-top: 30px;">
-    <div class="row">
-      <div class="col-md-12">
-        <h1 style="color: #00095b">User/Author Details Updation</h1>
-      </div>
-      <br><br><br><br><br>
-      <form class="col-md-6 offset-md-3" [formGroup]="updateUserForm" (ngSubmit)="handleUpdateUser()">
-        <div class="form-group row mb-3">
-          <label for="usernameInput" class="col-sm-2 col-form-label">Name</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="usernameInput" placeholder="Enter Name" formControlName="username"
-              [ngClass]="{
-                  'is-invalid': updateUserForm.get('username')?.touched && updateUserForm.get('username')?.invalid
-                }" />
-            <div class="invalid-feedback">
-              <div id="usernameRequired">userName is required</div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group row mb-3">
-          <label for="emailInput" class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Enter Email" id="emailInput" formControlName="email"
-              [ngClass]="{
-                  'is-invalid': updateUserForm.get('email')?.touched && updateUserForm.get('email')?.invalid
-                }" />
-            <div class="invalid-feedback">
-              <div id="emailRequired" *ngIf="updateUserForm.get('email')?.hasError('required')">Email is required</div> 
-            </div>
-          </div>
-        </div>
-        <br>
-
-        <div class="alert alert-success" *ngIf="isSaved" >Updated Successfully</div>
-        <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
-
-        <div class="form-group row">
-          <div class="col-sm-12 text-center">
-            <button type="submit" class="btn btn-primary submitBtn" [disabled]="!updateUserForm.valid">
-              Update
-            </button>
-            <br><br>
-          </div>
-        </div>
-      </form>
+  <div class="row">
+    <div class="col-md-12">
+      <h1 style="color: #00095b">User/Author Details Updation</h1>
     </div>
+    <br><br><br><br><br>
+    <form class="col-md-6 offset-md-3" [formGroup]="updateUserForm" (ngSubmit)="handleUpdateUser()">
+      <div class="form-group row mb-3">
+        <label for="usernameInput" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="usernameInput" placeholder="Enter Name" formControlName="username"
+            [ngClass]="{
+                'is-invalid': updateUserForm.get('username')?.touched && updateUserForm.get('username')?.invalid
+              }" />
+          <div class="invalid-feedback">
+            <div id="usernameRequired">userName is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row mb-3">
+        <label for="emailInput" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Enter Email" id="emailInput" formControlName="email"
+            [ngClass]="{
+                'is-invalid': updateUserForm.get('email')?.touched && updateUserForm.get('email')?.invalid
+              }" />
+          <div class="invalid-feedback">
+            <div id="emailRequired" *ngIf="updateUserForm.get('email')?.hasError('required')">Email is required</div> 
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="alert alert-success" *ngIf="isSaved" >Updated Successfully</div>
+      <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+
+      <div class="form-group row">
+        <div class="col-sm-12 text-center">
+          <button type="submit" class="btn btn-primary submitBtn" [disabled]="!updateUserForm.valid">
+            Update
+          </button>
+          <br><br>
+        </div>
+      </div>
+    </form>
   </div>
+</div>

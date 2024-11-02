@@ -7,22 +7,17 @@ import { HomeComponent } from './home/home.component';
 import { BlogListComponent } from './blogs/components/blog-list/blog-list.component';
 import { BlogDetailsComponent } from './blogs/components/blog-details/blog-details.component';
 import { AboutComponent } from './about/about.component';
-<<<<<<< Updated upstream
-=======
+
 import { ToastrModule } from 'ngx-toastr';
 import { AuthorsComponent } from './authors/components/authors-list/authors-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
->>>>>>> Stashed changes
-
-import { ToastrModule } from 'ngx-toastr';
-import { AuthorsComponent } from './authors/authors.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, MenuListComponent, FooterComponent, HomeComponent,BlogListComponent,BlogDetailsComponent,AboutComponent,AuthorsComponent, 
-  ToastrModule, ReactiveFormsModule],
+  imports: [RouterOutlet, HeaderComponent, MenuListComponent, FooterComponent, HomeComponent,BlogListComponent,BlogDetailsComponent,AboutComponent, 
+    AuthorsComponent, ToastrModule, ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
