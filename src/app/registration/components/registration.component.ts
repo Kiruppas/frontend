@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { RegistrationService } from '../service/registration.service';
-import { User } from '../interface/user';
+import { IUser } from '../models/iuser';
 
 @Component({
   selector: 'app-registration',
@@ -32,7 +32,7 @@ export class RegistrationComponent {
   }
   handleAddUser() {
     if (this.addUserForm.valid) {
-      const user: User = this.addUserForm.value; // Get the form data
+      const user: IUser = this.addUserForm.value; // Get the form data
       this.registrationService.registerUser(user).subscribe({
         next: (response: any) => {
           this.registrationSuccess = true;
