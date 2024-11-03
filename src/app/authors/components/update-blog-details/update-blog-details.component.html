@@ -1,0 +1,39 @@
+<div class="container mt-4">
+    <h2>Update Blog</h2>
+    <form [formGroup]="updateBlogForm" (ngSubmit)="handleUpdateBlog()">
+      <div class="mb-3">
+        <label for="title" class="form-label"><b>Title:</b></label>
+        <input type="text" class="form-control" id="title" placeholder="Enter title" formControlName="title">
+        <div *ngIf="updateBlogForm.get('title')?.touched" class="text-danger">
+          <div *ngIf="updateBlogForm.get('title')?.errors?.['required']">Title is required.</div>
+          <div *ngIf="updateBlogForm.get('title')?.errors?.['maxLength']">Title cannot exceed 30 characters.</div>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="category" class="form-label"><b>Category:</b></label>
+        <select class="form-control" id="category" formControlName="category">
+          <option value="" disabled>Select a category</option>
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+        <div *ngIf="updateBlogForm.get('category')?.touched && updateBlogForm.get('category')?.errors?.['required']" class="text-danger">
+          Category is required.
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="content" class="form-label"><b>Content:</b></label>
+        <textarea class="form-control" id="content" formControlName="content" rows="5"></textarea>
+        <div *ngIf="updateBlogForm.get('content')?.touched" class="text-danger">
+          <div *ngIf="updateBlogForm.get('content')?.errors?.['required']">Content is required.</div>
+          <div *ngIf="updateBlogForm.get('content')?.errors?.['maxLength']">Content cannot exceed 100 characters.</div>
+        </div>
+      </div>
+  
+      <!-- <div *ngIf="isSaved" class="alert alert-success">Saved Successfully</div> -->
+      <!-- <div *ngIf="!isSaved" class="alert alert-danger">Unable to Create Blog. Some error occurred. Try again later.</div> -->
+  
+      <button type="submit" class="btn btn-primary" [disabled]="updateBlogForm.invalid">Submit</button>
+    </form>
+  </div>
+  

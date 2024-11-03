@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BlogService } from '../../service/blogs.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -23,7 +23,8 @@ export class CreateBlogComponent {
   //isSaved = false;
   categories = ['TECHNOLOGY', 'TRAVEL', 'FOOD', 'SPORTS', 'POLITICS'];
 
-  constructor(private blogService: BlogService, private route: ActivatedRoute, private toastr: ToastrService) {
+  constructor(private blogService: BlogService, private route: ActivatedRoute, private toastr: ToastrService,
+    private router: Router) {
     // Reading the URL param
     this.userId = this.route.snapshot.paramMap.get('userId');
 
@@ -41,6 +42,8 @@ export class CreateBlogComponent {
       .subscribe((Response: any) => {
         this.toastr.success('Blog added successfully!', 'Success');
         this.resetForm();
+        this.router.navigate(['/blogs']);
+
       });
   }
 

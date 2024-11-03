@@ -16,4 +16,20 @@ export class MyBlogsService {
   getMyBlogs(userId: number): Observable<IMyBlog[]> {
     return this.http.get<IMyBlog[]>(`${this.apiUrl}/user/${userId}`);
   }
+
+  getBlogById(blogId: number): Observable<IMyBlog> { // purpose: getting the data for updation
+    return this.http.get<IMyBlog>(`${this.apiUrl}/viewblog/${blogId}`);
+}
+
+  updateBlog(blog: Partial<IMyBlog>): Observable<IMyBlog | null> {
+      const url = `${this.apiUrl}/edit/${blog.blogId}`; 
+      return new Observable(observer => {
+        this.http.put<IMyBlog>(url, blog).subscribe({
+          next: data => {
+            observer.next(data);
+            observer.complete();
+          }
+        });
+      });
+    }
 }
