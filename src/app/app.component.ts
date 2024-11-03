@@ -13,7 +13,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, MenuListComponent, FooterComponent, HomeComponent,BlogListComponent,BlogDetailsComponent,AboutComponent,MyProfileComponent, 
+  imports: [RouterOutlet, HeaderComponent, MenuListComponent, FooterComponent, HomeComponent,BlogListComponent,BlogDetailsComponent,AboutComponent,MyProfileComponent 
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
