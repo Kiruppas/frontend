@@ -32,7 +32,7 @@ export class BlogListComponent {
 
   viewBlog(blogId: string) {
     console.log('Navigating to blog with ID:', blogId);
-    this.router.navigate(['/blogs', blogId]);
+    this.router.navigate(['/blogs/viewblog', blogId]);
   }
 }
   

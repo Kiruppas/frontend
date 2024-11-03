@@ -15,13 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-root',
   standalone: true,
-<<<<<<< HEAD
   imports: [RouterOutlet, HeaderComponent, MenuListComponent, FooterComponent, HomeComponent,BlogListComponent,BlogDetailsComponent,AboutComponent, 
     AuthorsComponent, ToastrModule, ReactiveFormsModule],
-=======
-  imports: [RouterOutlet, HeaderComponent, MenuListComponent, FooterComponent, HomeComponent,BlogListComponent,BlogDetailsComponent,AboutComponent,MyProfileComponent 
-  ],
->>>>>>> e1c763dac0993bf562350b71da0b20a5e1178014
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
