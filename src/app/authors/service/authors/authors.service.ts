@@ -16,10 +16,6 @@ export class AuthorsService {
     return this.http.get<IAuthor[]>(this.apiUrl);
   }
 
-<<<<<<< HEAD:src/app/authors/service/authors/authors.service.ts
-  getAuthorById(userId: any) {
-    return this.http.get(`${this.apiUrl}/${userId}`);
-=======
   addAuthor(formData: any) {
     console.log(formData);
     return this.http.post(this.apiUrl, formData);
@@ -27,7 +23,6 @@ export class AuthorsService {
 
   getAuthorById(userId: number): Observable<IAuthor> {
     return this.http.get<IAuthor>(`${this.apiUrl}/${userId}`);
->>>>>>> 063f9905e27a4680144e27906b0d24d41701e44d:src/app/authors/service/authors.service.ts
   }
   
 

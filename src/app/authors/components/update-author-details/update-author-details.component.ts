@@ -3,9 +3,9 @@ import { IAuthor } from '../../models/iauthor';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
-import { AuthorsService } from '../../service/authors.service';
-import { response } from 'express';
+import { AuthorsService } from '../../service/authors/authors.service';
 import { Observable, of } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-author-details',
@@ -18,12 +18,11 @@ export class UpdateAuthorDetailsComponent implements OnInit{
 
   updateUserForm: FormGroup;
   authorID!: any;
-  isSaved = false;
   errorMessage: any;
   author$: Observable<IAuthor | null> = of(null);
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, 
-    private authorService: AuthorsService, private router: Router) {
+    private authorService: AuthorsService, private router: Router,  private toastr: ToastrService) {
     this.updateUserForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
@@ -61,12 +60,13 @@ export class UpdateAuthorDetailsComponent implements OnInit{
 
       this.authorService.updateAuthor(updatedAuthor).subscribe({
         next: () => {
-          this.isSaved = true;
+          this.toastr.success('User updated successfully!', 'Success');
           console.log('Author updated successfully!');
           this.router.navigate(['/authors', this.authorID]); // redirects to author-details page after successfull updation
         },
         error: (error) => {
           this.errorMessage = error.message;
+          this.toastr.error('Error updating author', 'Success');
           console.error('Error updating author:', error);
         }
       });

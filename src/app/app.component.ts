@@ -9,11 +9,7 @@ import { BlogDetailsComponent } from './blogs/components/blog-details/blog-detai
 import { AboutComponent } from './about/about.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthorsComponent } from './authors/components/authors-list/authors-list.component';
-<<<<<<< HEAD
-
-=======
 import { ReactiveFormsModule } from '@angular/forms';
->>>>>>> 063f9905e27a4680144e27906b0d24d41701e44d
 
 
 @Component({
