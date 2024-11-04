@@ -9,12 +9,18 @@ import { AuthorDetailsComponent } from './authors/components/author-details/auth
 import { MyBlogsListComponent } from './authors/components/my-blogs-list/my-blogs-list.component';
 import { UpdateAuthorDetailsComponent } from './authors/components/update-author-details/update-author-details.component';
 import { BlogDetailsComponent } from './blogs/components/blog-details/blog-details.component';
+<<<<<<< HEAD
 import { DeleteAuthorDetailsComponent } from './authors/components/delete-author-details/delete-author-details.component';
 
+=======
+import { UpdateBlogDetailsComponent } from './authors/components/update-blog-details/update-blog-details.component';
+import { DeleteAuthorDetailsComponent } from './authors/components/delete-author-details/delete-author-details.component';
+>>>>>>> a8585d020f146fa2bf5c4c174a493aaf275dbf3a
 
 
 // config the routes
 export const routes: Routes = [
+<<<<<<< HEAD
     { path: '', component: HomeComponent, title:"Home"},
     { path: 'registration', component: RegistrationComponent, title:"Registration"},
     { path: 'blogs' ,children:[
@@ -31,4 +37,26 @@ export const routes: Routes = [
         { path: 'edit/:userId', component: UpdateAuthorDetailsComponent, title: "Edit-Author"},
         { path: 'delete/:userId', component: DeleteAuthorDetailsComponent, title: "Delete-Author"}
     ]}
+=======
+  { path: '', component: HomeComponent, title: "Home" },
+  { path: 'registration', component: RegistrationComponent, title: "Registration" },
+  {
+    path: 'blogs', children: [
+      { path: '', component: BlogListComponent, title: "BlogList" },
+      { path: ':userId', component: CreateBlogComponent, title: "Create Blog" },
+      { path: 'user/:userId', component: MyBlogsListComponent, title: "My Blogs" },
+      { path: 'viewblog/:blogId', component: BlogDetailsComponent },
+      { path: 'edit/:blogId', component: UpdateBlogDetailsComponent, title: "Edit Blogs" }
+    ]
+  },
+  { path: 'about', component: AboutComponent, title: "About Us" },
+  {
+    path: 'authors', children: [
+      { path: '', component: AuthorsComponent, title: "Authors" },
+      { path: ':userId', component: AuthorDetailsComponent, title: "Authors Details" },
+      { path: 'edit/:userId', component: UpdateAuthorDetailsComponent, title: "Edit Author" },
+      { path: 'delete/:userId', component: DeleteAuthorDetailsComponent, title: "Delete Author" }
+    ]
+  }
+>>>>>>> a8585d020f146fa2bf5c4c174a493aaf275dbf3a
 ];

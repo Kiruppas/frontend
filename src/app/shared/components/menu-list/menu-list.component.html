@@ -1,8 +1,12 @@
-<ul class="nav justify-content-center" style="background-color: antiquewhite;">
-    <li class="nav-item" *ngFor="let item of menuListItems">
-        <a class="nav-link" [routerLink]="item.link" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: item.exact}">
-            {{item.label}}
-        </a>
-    </li>
+<ul class="nav justify-content-center" style="background-color: antiquewhite">
+  <li class="nav-item" *ngFor="let item of menuListItems">
+    <a
+      class="nav-link"
+      [routerLink]="item.link"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: item.exact }"
+    >
+      {{ item.label }}
+    </a>
+  </li>
 </ul>
