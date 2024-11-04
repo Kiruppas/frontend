@@ -37,4 +37,8 @@ export class AuthorsService {
       });
     });
   }
+
+  deleteAuthorById(userId: number): Observable<IAuthor> {
+    return this.http.delete<IAuthor>(`${this.apiUrl}/delete/${userId}`);
+  }
 }
