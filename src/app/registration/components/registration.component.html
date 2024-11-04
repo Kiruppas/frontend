@@ -39,7 +39,7 @@
             }"
           />
           <div class="invalid-feedback">
-            <div id="usernameRequired">userName is required</div>
+            <div id="usernameRequired">UserName is required</div>
           </div>
         </div>
       </div>
@@ -86,13 +86,22 @@
             }"
           />
           <div class="invalid-feedback">
-            <div *ngIf="addUserForm.get('password')?.hasError('required')">
+            <div
+              id="passwordRequired"
+              *ngIf="addUserForm.get('password')?.hasError('required')"
+            >
               Password is required
             </div>
-            <div *ngIf="addUserForm.get('password')?.hasError('minLength')">
-              Password must be at least 8 characters long
+            <div
+              id="invalidPasswordLength"
+              *ngIf="addUserForm.get('password')?.hasError('minLength')"
+            >
+              Password must be at least 6 characters long
             </div>
-            <div *ngIf="addUserForm.get('password')?.hasError('specialChar')">
+            <div
+              id="invalidPassword"
+              *ngIf="addUserForm.get('password')?.hasError('specialChar')"
+            >
               Password must contain at least one special character
             </div>
           </div>
