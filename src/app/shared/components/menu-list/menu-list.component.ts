@@ -5,13 +5,13 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-menu-list',
   standalone: true,
-  imports: [ RouterModule, CommonModule ],
+  imports: [RouterModule, CommonModule],
   templateUrl: './menu-list.component.html',
   styles: `
     .active{
       color:black;
     }
-`
+`,
 })
 export class MenuListComponent {
   menuListItems = [

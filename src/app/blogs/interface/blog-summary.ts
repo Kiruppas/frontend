@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { User } from './user';
 
 export interface BlogSummary {
   blogId: string;
@@ -6,5 +6,5 @@ export interface BlogSummary {
   user: User;
   category: string;
   createdAt: Date;
-  userId:number;
+  userId: number;
 }

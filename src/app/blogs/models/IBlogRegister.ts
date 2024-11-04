@@ -1,5 +1,5 @@
 export interface IBlogRegister {
-    title: string,
-    category: string,
-    content: string
+  title: string;
+  category: string;
+  content: string;
 }

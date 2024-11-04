@@ -5,32 +5,27 @@ import { UpdateAuthorDetailsComponent } from '../update-author-details/update-au
 import { IAuthor } from '../../models/iauthor';
 import { CommonModule } from '@angular/common';
 
-
 @Component({
   selector: 'app-author-details',
   standalone: true,
-  imports: [
-    RouterModule,  
-    CommonModule
-  ],
+  imports: [RouterModule, CommonModule],
   templateUrl: './author-details.component.html',
-  styles: ``
+  styles: ``,
 })
 export class AuthorDetailsComponent {
   userId: any;
   author: any;
-  
-  constructor(private authorService: AuthorsService, private route: ActivatedRoute) {
+
+  constructor(
+    private authorService: AuthorsService,
+    private route: ActivatedRoute
+  ) {
     this.userId = this.route.snapshot.paramMap.get('userId');
   }
 
   ngOnInit(): void {
-    this.authorService.getAuthorById(this.userId)
-      .subscribe((response: any) => {
-        this.author = response;
-      })
-    
+    this.authorService.getAuthorById(this.userId).subscribe((response: any) => {
+      this.author = response;
+    });
   }
-
 }
-

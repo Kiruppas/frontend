@@ -1,33 +1,43 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IAuthor } from '../../models/iauthor';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 
 import { response } from 'express';
 import { Observable, of } from 'rxjs';
 import { AuthorsService } from '../../service/authors/authors.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-author-details',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule, RouterModule ],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './update-author-details.component.html',
-  styles: ``
+  styles: ``,
 })
-export class UpdateAuthorDetailsComponent implements OnInit{
-
+export class UpdateAuthorDetailsComponent implements OnInit {
   updateUserForm: FormGroup;
   authorID!: any;
   isSaved = false;
   errorMessage: any;
   author$: Observable<IAuthor | null> = of(null);
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, 
-    private authorService: AuthorsService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private toastr: ToastrService,
+    private authorService: AuthorsService,
+    private router: Router
+  ) {
     this.updateUserForm = this.fb.group({
       username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
     });
   }
 
@@ -40,14 +50,14 @@ export class UpdateAuthorDetailsComponent implements OnInit{
           if (author) {
             this.updateUserForm.patchValue({
               username: author.username,
-              email: author.email
+              email: author.email,
             });
           }
         },
         error: (error) => {
           this.errorMessage = error.message;
           console.error('Error fetching author:', error);
-        }
+        },
       });
     }
   }
@@ -57,19 +67,21 @@ export class UpdateAuthorDetailsComponent implements OnInit{
       const updatedAuthor: Partial<IAuthor> = {
         userId: this.authorID,
         username: this.updateUserForm.value.username,
-        email: this.updateUserForm.value.email
+        email: this.updateUserForm.value.email,
       };
 
       this.authorService.updateAuthor(updatedAuthor).subscribe({
         next: () => {
           this.isSaved = true;
           console.log('Author updated successfully!');
+          this.toastr.success('Author updated successfully!', 'Success');
           this.router.navigate(['/authors', this.authorID]); // redirects to author-details page after successfull updation
         },
         error: (error) => {
           this.errorMessage = error.message;
+          this.toastr.error('Error Updating Author!', 'Success');
           console.error('Error updating author:', error);
-        }
+        },
       });
     }
   }

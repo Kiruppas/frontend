@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { RegistrationService } from '../service/registration.service';
 import { IUser } from '../models/iuser';
@@ -11,10 +16,8 @@ import { IUser } from '../models/iuser';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
   templateUrl: './registration.component.html',
-  styles: ``
+  styles: ``,
 })
-
-
 export class RegistrationComponent {
   addUserForm: FormGroup;
   isSaved = false;
@@ -22,8 +25,10 @@ export class RegistrationComponent {
   registrationError = '';
   // toastr = inject(ToastrService);
 
-
-  constructor(private registrationService: RegistrationService, private toastr: ToastrService) {
+  constructor(
+    private registrationService: RegistrationService,
+    private toastr: ToastrService
+  ) {
     this.addUserForm = new FormGroup({
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -40,14 +45,14 @@ export class RegistrationComponent {
           console.log('Registration successful:', response);
           this.toastr.success('User added successfully!', 'Success');
           this.resetForm();
-
         },
         error: (error: any) => {
           this.registrationSuccess = false;
-          this.registrationError = error.error?.message || 'Registration failed. Please try again.';
+          this.registrationError =
+            error.error?.message || 'Registration failed. Please try again.';
           this.toastr.error(this.registrationError, 'Error');
           console.error('Registration error:', error);
-        }
+        },
       });
     }
   }
@@ -58,7 +63,3 @@ export class RegistrationComponent {
     this.registrationError = '';
   }
 }
-
-
-
-

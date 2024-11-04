@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MyBlogsService } from '../../service/my-blogs/my-blogs.service';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -10,16 +15,14 @@ import { IMyBlog } from '../../models/IMyBlog';
 import { AuthorsService } from '../../service/authors/authors.service';
 import { title } from 'node:process';
 
-
 @Component({
   selector: 'app-update-blog-details',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './update-blog-details.component.html',
-  styles: []
+  styles: [],
 })
 export class UpdateBlogDetailsComponent implements OnInit {
- 
   updateBlogForm: FormGroup;
   blogId!: any;
   isSaved = false;
@@ -27,12 +30,17 @@ export class UpdateBlogDetailsComponent implements OnInit {
   blog$: Observable<IMyBlog | null> = of(null);
   categories = ['TECHNOLOGY', 'TRAVEL', 'FOOD', 'SPORTS', 'POLITICS'];
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private toastr: ToastrService,
-    private myBlogService: MyBlogsService) {
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private myBlogService: MyBlogsService,
+    private toastr: ToastrService
+  ) {
     this.updateBlogForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(20)]],
       category: ['', Validators.required],
-      content: ['', [Validators.required, Validators.minLength(5)]]
+      content: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 
@@ -42,16 +50,16 @@ export class UpdateBlogDetailsComponent implements OnInit {
       this.blog$ = this.myBlogService.getBlogById(this.blogId);
       this.blog$.subscribe({
         next: (blog) => {
-          if(blog) {
+          if (blog) {
             this.updateBlogForm.patchValue({
               title: blog.title,
               category: blog.category,
-              content: blog.content
+              content: blog.content,
             });
           }
-        }
-      })
-  }
+        },
+      });
+    }
   }
   handleUpdateBlog(): void {
     if (this.updateBlogForm.valid && this.blogId !== null) {
@@ -59,7 +67,7 @@ export class UpdateBlogDetailsComponent implements OnInit {
         blogId: this.blogId,
         title: this.updateBlogForm.value.title,
         category: this.updateBlogForm.value.category,
-        content: this.updateBlogForm.value.content
+        content: this.updateBlogForm.value.content,
       };
 
       this.myBlogService.updateBlog(updatedBlog).subscribe({
@@ -73,7 +81,7 @@ export class UpdateBlogDetailsComponent implements OnInit {
           this.errorMessage = `Error updating blog: ${error.message}`;
           this.toastr.error(this.errorMessage, 'Error');
           console.error('Error updating blog:', error);
-        }
+        },
       });
     }
   }

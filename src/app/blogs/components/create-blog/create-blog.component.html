@@ -3,10 +3,20 @@
   <form [formGroup]="addBlogForm" (ngSubmit)="handleAddBlog()">
     <div class="mb-3">
       <label for="title" class="form-label"><b>Title:</b></label>
-      <input type="text" class="form-control" id="title" placeholder="Enter title" formControlName="title">
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        placeholder="Enter title"
+        formControlName="title"
+      />
       <div *ngIf="addBlogForm.get('title')?.touched" class="text-danger">
-        <div *ngIf="addBlogForm.get('title')?.errors?.['required']">Title is required.</div>
-        <div *ngIf="addBlogForm.get('title')?.errors?.['maxLength']">Title cannot exceed 30 characters.</div>
+        <div *ngIf="addBlogForm.get('title')?.errors?.['required']">
+          Title is required.
+        </div>
+        <div *ngIf="addBlogForm.get('title')?.errors?.['maxLength']">
+          Title cannot exceed 30 characters.
+        </div>
       </div>
     </div>
 
@@ -14,25 +24,45 @@
       <label for="category" class="form-label"><b>Category:</b></label>
       <select class="form-control" id="category" formControlName="category">
         <option value="" disabled>Select a category</option>
-        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
       </select>
-      <div *ngIf="addBlogForm.get('category')?.touched && addBlogForm.get('category')?.errors?.['required']" class="text-danger">
+      <div
+        *ngIf="addBlogForm.get('category')?.touched && addBlogForm.get('category')?.errors?.['required']"
+        class="text-danger"
+      >
         Category is required.
       </div>
     </div>
 
     <div class="mb-3">
       <label for="content" class="form-label"><b>Content:</b></label>
-      <textarea class="form-control" id="content" formControlName="content" rows="5"></textarea>
+      <textarea
+        class="form-control"
+        id="content"
+        formControlName="content"
+        rows="5"
+      ></textarea>
       <div *ngIf="addBlogForm.get('content')?.touched" class="text-danger">
-        <div *ngIf="addBlogForm.get('content')?.errors?.['required']">Content is required.</div>
-        <div *ngIf="addBlogForm.get('content')?.errors?.['maxLength']">Content cannot exceed 100 characters.</div>
+        <div *ngIf="addBlogForm.get('content')?.errors?.['required']">
+          Content is required.
+        </div>
+        <div *ngIf="addBlogForm.get('content')?.errors?.['maxLength']">
+          Content cannot exceed 100 characters.
+        </div>
       </div>
     </div>
 
     <!-- <div *ngIf="isSaved" class="alert alert-success">Saved Successfully</div> -->
     <!-- <div *ngIf="!isSaved" class="alert alert-danger">Unable to Create Blog. Some error occurred. Try again later.</div> -->
 
-    <button type="submit" class="btn btn-primary" [disabled]="addBlogForm.invalid">Submit</button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="addBlogForm.invalid"
+    >
+      Submit
+    </button>
   </form>
 </div>
