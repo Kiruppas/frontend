@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   <h2>{{ blog.title }}</h2>
   <p><strong>Author:</strong> {{ blog.user.username}}</p>
   <p><strong>Category:</strong> {{ blog.category }}</p>
-  <p><strong>Published:</strong> {{ blog.createdAt}}</p>
+  <p><strong>Published:</strong> {{ blog.createdAt | date}}</p>
   <hr>
   <div [innerHTML]="blog.content"></div>
 </div>

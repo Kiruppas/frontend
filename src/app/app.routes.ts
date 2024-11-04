@@ -9,6 +9,8 @@ import { AuthorDetailsComponent } from './authors/components/author-details/auth
 import { MyBlogsListComponent } from './authors/components/my-blogs-list/my-blogs-list.component';
 import { UpdateAuthorDetailsComponent } from './authors/components/update-author-details/update-author-details.component';
 import { BlogDetailsComponent } from './blogs/components/blog-details/blog-details.component';
+import { DeleteAuthorDetailsComponent } from './authors/components/delete-author-details/delete-author-details.component';
+
 
 
 // config the routes
@@ -19,12 +21,14 @@ export const routes: Routes = [
         { path: '', component: BlogListComponent, title:"BlogList"},
         { path: ':userId', component:CreateBlogComponent, title:"Create-Blog"},
         { path: 'user/:userId', component:MyBlogsListComponent, title:"My-Blogs"},
-        { path: 'viewblog/:blogId', component: BlogDetailsComponent }
+        { path: 'viewblog/:blogId', component: BlogDetailsComponent, title:"Blog" },
+        { path: 'delete/:blogId', component:DeleteAuthorDetailsComponent, title:"Delete-Blog"}
     ]},
     { path: 'about', component:AboutComponent, title:"About-Us"},
     { path: 'authors', children:[
         { path: '', component:AuthorsComponent, title:"Authors"},
         { path: ':userId', component:AuthorDetailsComponent, title:"Authors-Details"},
-        { path: 'edit/:userId', component: UpdateAuthorDetailsComponent, title: "Edit Author"}
+        { path: 'edit/:userId', component: UpdateAuthorDetailsComponent, title: "Edit-Author"},
+        { path: 'delete/:userId', component: DeleteAuthorDetailsComponent, title: "Delete-Author"}
     ]}
 ];

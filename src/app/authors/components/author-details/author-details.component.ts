@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { AuthorsService } from '../../service/authors/authors.service';
-import { UpdateAuthorDetailsComponent } from '../update-author-details/update-author-details.component';
-import { IAuthor } from '../../models/iauthor';
 import { CommonModule } from '@angular/common';
+
 
 
 @Component({

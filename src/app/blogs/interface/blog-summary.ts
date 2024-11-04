@@ -1,3 +1,4 @@
+import { DatePipe } from "@angular/common";
 import { User } from "./user";
 
 export interface BlogSummary {
