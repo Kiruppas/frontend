@@ -86,7 +86,15 @@
             }"
           />
           <div class="invalid-feedback">
-            <div id="passwordRequired">Password is required</div>
+            <div *ngIf="addUserForm.get('password')?.hasError('required')">
+              Password is required
+            </div>
+            <div *ngIf="addUserForm.get('password')?.hasError('minLength')">
+              Password must be at least 8 characters long
+            </div>
+            <div *ngIf="addUserForm.get('password')?.hasError('specialChar')">
+              Password must contain at least one special character
+            </div>
           </div>
         </div>
       </div>

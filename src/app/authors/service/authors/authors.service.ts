@@ -31,7 +31,7 @@ export class AuthorsService {
       this.http.put<IAuthor>(url, author).subscribe({
         next: (data) => {
           observer.next(data);
-          observer.complete();
+          observer.complete(); // signals completion of emiting values
         },
       });
     });

@@ -2,14 +2,24 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { RegistrationService } from '../service/registration.service';
 import { IUser } from '../models/iuser';
+
+// to check for at least one special character
+const specialCharValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(control.value);
+  return hasSpecialChar ? null : { specialChar: true };
+};
+
 
 @Component({
   selector: 'app-registration',
@@ -25,6 +35,7 @@ export class RegistrationComponent {
   registrationError = '';
   // toastr = inject(ToastrService);
 
+  
   constructor(
     private registrationService: RegistrationService,
     private toastr: ToastrService
@@ -32,9 +43,16 @@ export class RegistrationComponent {
     this.addUserForm = new FormGroup({
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(6),
+          specialCharValidator,
+        ],
+      }),
     });
   }
+
   handleAddUser() {
     if (this.addUserForm.valid) {
       const user: IUser = this.addUserForm.value; // Get the form data

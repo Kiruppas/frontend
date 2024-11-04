@@ -12,8 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable, catchError, of, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { IMyBlog } from '../../models/IMyBlog';
-import { AuthorsService } from '../../service/authors/authors.service';
-import { title } from 'node:process';
+
 
 @Component({
   selector: 'app-update-blog-details',
