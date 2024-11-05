@@ -1,20 +1,17 @@
-import { Component } from '@angular/core';
-import { Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MyBlogsService } from '../../service/my-blogs/my-blogs.service';
 import { ToastrService } from 'ngx-toastr';
-import { IMyBlog } from '../../models/IMyBlog';
+
 import { Location } from '@angular/common';
 @Component({
   selector: 'app-delete-blog',
   standalone: true,
   imports: [],
-  templateUrl: './delete-blog.component.html',
+  template: '',
   styles: ' ',
 })
 export class DeleteBlogComponent {
-  @Input() blogId: number | undefined;
-  @Input() blogTitle: string | undefined;
-  @Output() deletionConfirmed = new EventEmitter<void>();
+ @Input() blogId: number | undefined;
 
   constructor(
     private myBlogService: MyBlogsService,
@@ -27,7 +24,7 @@ export class DeleteBlogComponent {
       this.myBlogService.deleteBlog(this.blogId).subscribe(
         () => {
           this.toastr.success('Deleted successfully!', 'Success');
-          this.location.back();
+          this.location.back(); // navigate back to the previous page
         },
         (error) => {
           console.error('Failed to delete the blog', error);

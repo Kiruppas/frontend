@@ -7,17 +7,14 @@ import { AuthorsService } from '../../service/authors/authors.service';
 @Component({
   selector: 'app-authors',
   standalone: true,
-  imports: [ 
-             RouterModule, 
-             CommonModule 
-           ],
+  imports: [RouterModule, CommonModule],
   templateUrl: './authors-list.component.html',
-  styles: ``
+  styles: ``,
 })
-export class AuthorsComponent implements OnInit{
+export class AuthorsComponent implements OnInit {
   authors: IAuthor[] = [];
 
-  constructor(private authorsService: AuthorsService) { }
+  constructor(private authorsService: AuthorsService) {}
 
   ngOnInit(): void {
     this.authorsService.getAuthors().subscribe((response: IAuthor[]) => {
@@ -25,5 +22,4 @@ export class AuthorsComponent implements OnInit{
       console.log(this.authors);
     });
   }
-
 }

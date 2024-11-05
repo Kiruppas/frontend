@@ -3,42 +3,40 @@ import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IMyBlog } from '../../models/IMyBlog';
 import { MyBlogsService } from '../../service/my-blogs/my-blogs.service';
-import { Location } from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
-import { DeleteBlogComponent } from "../delete-blog/delete-blog.component";
+import { DeleteBlogComponent } from '../delete-blog/delete-blog.component';
 
 @Component({
   selector: 'app-my-blogs-list',
   standalone: true,
-  imports: [
-    RouterModule,
-    CommonModule,
-    RouterModule,
-    DeleteBlogComponent
-],
+  imports: [RouterModule, CommonModule, RouterModule, DeleteBlogComponent],
   templateUrl: './my-blogs-list.component.html',
-  styles: ``
+  styles: ``,
 })
-
 export class MyBlogsListComponent {
   myBlogs: IMyBlog[] = [];
-  selectedBlogId:number|undefined;
+  selectedBlogId: number | undefined;
   userId: any;
+  blogId: any;
 
-  @ViewChild('deleteComponent')deleteComponent!:DeleteBlogComponent
+  @ViewChild('deleteComponent') deleteComponent!: DeleteBlogComponent;
 
-
-  constructor(private myBlogService: MyBlogsService, private route: ActivatedRoute, private location:Location, private toastr: ToastrService) {
+  constructor(
+    private myBlogService: MyBlogsService,
+    private route: ActivatedRoute
+  ) {
     // Reading the URL param
     this.userId = this.route.snapshot.paramMap.get('userId');
   }
 
   ngOnInit(): void {
-    this.myBlogService.getMyBlogs(this.userId).subscribe((response: IMyBlog[]) => {
-      this.myBlogs = response;
-      this.loadBlogs();
-    });
+    this.myBlogService
+      .getMyBlogs(this.userId)
+      .subscribe((response: IMyBlog[]) => {
+        this.myBlogs = response;
+        this.loadBlogs();
+      });
   }
+
   loadBlogs(): void {
     this.myBlogService.getMyBlogs(this.userId).subscribe(
       (response: IMyBlog[]) => {
@@ -50,11 +48,8 @@ export class MyBlogsListComponent {
       }
     );
   }
-  deleteBlog(blogId:number):void{
-    this.selectedBlogId=blogId;
-    this.deleteComponent.deleteBlog();//call the method
-
- 
+  deleteBlog(blogId: number): void {
+    this.selectedBlogId = blogId;
+    this.deleteComponent.deleteBlog(); //call the method
   }
 }
- 

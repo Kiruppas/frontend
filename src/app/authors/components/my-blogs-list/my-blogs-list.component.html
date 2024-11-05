@@ -1,22 +1,33 @@
 <div class="row mt-4" *ngIf="myBlogs.length > 0; else noBlogs">
-    <div class="col-sm-4 mb-3 mb-sm-0" *ngFor="let myBlog of myBlogs; let i = index">
-        <div class="card">
-            <div class="card-body">
-                <h4>{{myBlog.title}}</h4>
-                <h6 class="card-title">CATEGORY : {{myBlog.category}}</h6>
-                <p class="card-text">{{myBlog.content}}</p>
-                <div class="d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-warning pe-4 ps-4">Edit</a>
-                    <a href="#" class="btn btn-danger ms-4 pe-3 ps-3" (click)="deleteBlog(myBlog.blogId); $event.preventDefault()">Delete</a>
-                </div>
-            </div>
+  <div
+    class="col-sm-4 mb-3 mb-sm-0"
+    *ngFor="let myBlog of myBlogs; let i = index"
+  >
+    <div class="card">
+      <div class="card-body">
+        <h4>{{ myBlog.title }}</h4>
+        <h6 class="card-title">CATEGORY : {{ myBlog.category }}</h6>
+        <p class="card-text">{{ myBlog.content }}</p>
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="#" class="btn btn-warning pe-4 ps-4">Edit</a>
+          <a
+            href="#"
+            class="btn btn-danger ms-4 pe-3 ps-3"
+            (click)="deleteBlog(myBlog.blogId); $event.preventDefault()"
+            >Delete</a
+          >
         </div>
-        <br *ngIf="(i + 1) % 3 === 0">
+      </div>
     </div>
+    <br *ngIf="(i + 1) % 3 === 0" />
+  </div>
 </div>
+
 <ng-template #noBlogs>
-    <h4 class="text-danger" style="margin-top: 50px; text-align: center;">No blogs have been posted yet by you!</h4>
+  <h4 class="text-danger" style="margin-top: 50px; text-align: center">
+    No blogs have been posted yet by you!
+  </h4>
 </ng-template>
 
-<app-delete-blog
-  [blogId]="selectedBlogId" #deleteComponent></app-delete-blog>
+<app-delete-blog [blogId]="selectedBlogId" #deleteComponent></app-delete-blog>
+<!-- access the child component -->

@@ -10,6 +10,8 @@ import { MyBlogsListComponent } from './authors/components/my-blogs-list/my-blog
 import { UpdateAuthorDetailsComponent } from './authors/components/update-author-details/update-author-details.component';
 import { BlogDetailsComponent } from './blogs/components/blog-details/blog-details.component';
 import { DeleteBlogComponent } from './authors/components/delete-blog/delete-blog.component';
+import { UpdateBlogDetailsComponent } from './authors/components/update-blog-details/update-blog-details.component';
+import { DeleteAuthorDetailsComponent } from './authors/components/delete-author-details/delete-author-details.component';
 
 
 // config the routes
@@ -27,6 +29,7 @@ export const routes: Routes = [
         { path: '', component:AuthorsComponent, title:"Authors"},
         { path: ':userId', component:AuthorDetailsComponent, title:"Authors-Details"},
         { path: 'edit/:userId', component: UpdateAuthorDetailsComponent, title: "Edit Author"},
+        { path: 'delete/:userId',component: DeleteAuthorDetailsComponent, title: "Delete Author"},
         { path: 'delete/:blogId', component:DeleteBlogComponent} // Route for deletion confirmation
     ]}
 ];
