@@ -37,9 +37,9 @@ export class UpdateBlogDetailsComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.updateBlogForm = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(20)]],
+      title: ['', Validators.required],
       category: ['', Validators.required],
-      content: ['', [Validators.required, Validators.minLength(5)]],
+      content: ['', Validators.required],
     });
   }
 

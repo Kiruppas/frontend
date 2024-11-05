@@ -1,5 +1,5 @@
-<div class="container mt-4">
-  <h2>Create Blog Post</h2>
+<div class="container" style="margin-top: 70px; margin-bottom: 20px; color: #00095b">
+  <h2 style="text-align: center;">CREATE BLOG POST</h2>
   <form [formGroup]="addBlogForm" (ngSubmit)="handleAddBlog()">
     <div class="mb-3">
       <label for="title" class="form-label"><b>Title:</b></label>
@@ -56,10 +56,11 @@
 
     <!-- <div *ngIf="isSaved" class="alert alert-success">Saved Successfully</div> -->
     <!-- <div *ngIf="!isSaved" class="alert alert-danger">Unable to Create Blog. Some error occurred. Try again later.</div> -->
-
+    <br />
     <button
       type="submit"
-      class="btn btn-primary"
+      class="btn btn-outline-light"
+      style="margin-left: 500px"
       [disabled]="addBlogForm.invalid"
     >
       Submit

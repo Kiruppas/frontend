@@ -9,14 +9,16 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="container" style="margin-top: 40px;" *ngIf="blog">
-      <h2>{{ blog.title }}</h2>
-      <p><strong>Author:</strong> {{ blog.user.username }}</p>
-      <p><strong>Category:</strong> {{ blog.category }}</p>
-      <p><strong>Published:</strong> {{ blog.createdAt }}</p>
-      <hr />
-      <div [innerHTML]="blog.content"></div>
+    <div style="margin: 50px;">
+    <div class="container" style="margin-top: 40px; height:500px;" *ngIf="blog">
+      <h2 style="color: #00095b;">{{ blog.title }}</h2>
+      <p style="color: white ;"><strong style="color: #00095b;">Author:</strong> {{ blog.user.username }}</p>
+      <p style="color: white ;"><strong style="color: #00095b;">Category:</strong> {{ blog.category }}</p>
+      <p style="color: white ;"><strong style="color: #00095b;">Published:</strong> {{ blog.createdAt }}</p>
+      <b><hr /></b>
+      <div style="color: white" [innerHTML]="blog.content"></div>
     </div>
+  </div>
   `,
   styles: ``,
 })

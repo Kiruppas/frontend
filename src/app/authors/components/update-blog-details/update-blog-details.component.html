@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container" style="margin-top: 90px; height: 500px">
   <h2>Update Blog</h2>
   <form [formGroup]="updateBlogForm" (ngSubmit)="handleUpdateBlog()">
     <div class="mb-3">
@@ -59,7 +59,8 @@
 
     <button
       type="submit"
-      class="btn btn-primary"
+      class="btn btn-outline-light"
+      style="margin-left: 500px;"
       [disabled]="updateBlogForm.invalid"
     >
       Submit

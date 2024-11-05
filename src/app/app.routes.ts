@@ -22,7 +22,8 @@ export const routes: Routes = [
         { path: '', component: BlogListComponent, title:"BlogList"},
         { path: ':userId', component:CreateBlogComponent, title:"Create-Blog"},
         { path: 'user/:userId', component:MyBlogsListComponent, title:"My-Blogs"},
-        { path: 'viewblog/:blogId', component: BlogDetailsComponent }
+        { path: 'viewblog/:blogId', component: BlogDetailsComponent, title:"Blogs" },
+        { path: 'edit/:blogId', component: UpdateBlogDetailsComponent, title: "Edit Blogs" }
     ]},
     { path: 'about', component:AboutComponent, title:"About-Us"},
     { path: 'authors', children:[
