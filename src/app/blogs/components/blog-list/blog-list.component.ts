@@ -3,7 +3,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BlogService } from '../../service/blogs.service';
 import { BlogSummary } from '../../interface/blog-summary';
-import { Blog } from '../../interface/blogs';
 import { Router } from '@angular/router';
 
 

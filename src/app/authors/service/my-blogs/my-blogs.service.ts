@@ -16,4 +16,8 @@ export class MyBlogsService {
   getMyBlogs(userId: number): Observable<IMyBlog[]> {
     return this.http.get<IMyBlog[]>(`${this.apiUrl}/user/${userId}`);
   }
+
+  deleteBlog(blogId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/delete/${blogId}`);
+  }
 }

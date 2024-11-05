@@ -7,7 +7,7 @@
                 <p class="card-text">{{myBlog.content}}</p>
                 <div class="d-flex justify-content-center align-items-center">
                     <a href="#" class="btn btn-warning pe-4 ps-4">Edit</a>
-                    <a href="#" class="btn btn-danger ms-4 pe-3 ps-3">Delete</a>
+                    <a href="#" class="btn btn-danger ms-4 pe-3 ps-3" (click)="deleteBlog(myBlog.blogId); $event.preventDefault()">Delete</a>
                 </div>
             </div>
         </div>
@@ -17,3 +17,6 @@
 <ng-template #noBlogs>
     <h4 class="text-danger" style="margin-top: 50px; text-align: center;">No blogs have been posted yet by you!</h4>
 </ng-template>
+
+<app-delete-blog
+  [blogId]="selectedBlogId" #deleteComponent></app-delete-blog>
