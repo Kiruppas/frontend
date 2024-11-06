@@ -1,0 +1,144 @@
+<div class="container" style="margin-top: 55px">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 style="color: #00095b; text-align: center">REGISTER USER</h1>
+      <br />
+      <p class="text-white">
+        Create a free account to start sharing your thoughts and ideas. Join our
+        community and share your unique perspectives. Account creation is quick
+        and easy, letting you start writing and publishing immediately. Ready to
+        start your blogging journey?<br />
+        Sign up today and begin sharing your stories with the world! By
+        registering, you'll be able to:
+      </p>
+      <ul class="text-white">
+        <li>Create and publish blog posts effortlessly.</li>
+        <li>Manage your content from a user-friendly dashboard.</li>
+        <li>Connect with other bloggers and share your work.</li>
+      </ul>
+      <br />
+    </div>
+    <br /><br /><br /><br />
+    <form
+      class="col-md-6 offset-md-3"
+      [formGroup]="addUserForm"
+      (ngSubmit)="handleAddUser()"
+    >
+      <div class="form-group row mb-3">
+        <label
+          for="usernameInput"
+          class="col-sm-2 col-form-label"
+          style="color: #00095b"
+          ><b>NAME</b></label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="usernameInput"
+            placeholder="Enter Name"
+            formControlName="username"
+            [ngClass]="{
+              'is-invalid':
+                addUserForm.get('username')?.touched &&
+                addUserForm.get('username')?.invalid
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="addUserForm.get('username')?.errors?.['required']"
+          >
+            UserName is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group row mb-3">
+        <label
+          for="emailInput"
+          class="col-sm-2 col-form-label"
+          style="color: #00095b"
+          ><b>EMAIL</b></label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Email"
+            id="emailInput"
+            formControlName="email"
+            [ngClass]="{
+              'is-invalid':
+                addUserForm.get('email')?.touched &&
+                addUserForm.get('email')?.invalid
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="addUserForm.get('email')?.errors?.['required']"
+          >
+            Email is required
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="addUserForm.get('email')?.errors?.['email']"
+          >
+            Invalid email format
+          </div>
+        </div>
+      </div>
+      <div class="form-group row mb-3">
+        <label
+          for="passwordInput"
+          class="col-sm-2 col-form-label"
+          style="color: #00095b"
+          ><b>PASSWORD</b></label
+        >
+        <div class="col-sm-10">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Enter Password"
+            id="passwordInput"
+            formControlName="password"
+            [ngClass]="{
+              'is-invalid':
+                addUserForm.get('password')?.touched &&
+                addUserForm.get('password')?.invalid
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="addUserForm.get('password')?.errors?.['required']"
+          >
+            Password is required
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="addUserForm.get('password')?.errors?.['specialChar']"
+          >
+            Password must contain at least one special character (!#$%^&* etc.)
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="alert alert-success" *ngIf="registrationSuccess">
+        Saved Successfully
+      </div>
+      <div class="alert alert-danger" *ngIf="registrationError">
+        {{ registrationError }}
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-12 text-center">
+          <button
+            type="submit"
+            class="btn btn-outline-light submitBtn"
+            [disabled]="!addUserForm.valid"
+          >
+            Submit
+          </button>
+          <br /><br />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

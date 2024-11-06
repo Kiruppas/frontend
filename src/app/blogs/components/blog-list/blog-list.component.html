@@ -1,19 +1,23 @@
-<div class="container" style="margin-top: 30px;">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Blog List</h2>
-    <button class="btn btn-success" routerLink="/blogs/create-blog">Create Blog</button> 
-  </div>
+<div
+  class="container"
+  style="margin-top: 70px; margin-bottom: 90px; height: 500px"
+>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" *ngFor="let blog of blogs">
       <div class="card mb-4 shadow-sm">
         <div class="card-body">
-          <h5 class="card-title">Title:</h5>
-          <p class="card-text">Author:</p>
-          <p class="card-text">Category:</p>
-          <p class="card-text">Published:</p>
+          <h5 class="card-title">
+            <a
+              routerLink="view/{{ blog.blogId }}"
+              class="text-decoration-none"
+              >{{ blog.title }}</a
+            >
+          </h5>
+          <p class="card-text">Author: {{ blog.user.username }}</p>
+          <p class="card-text">Category: {{ blog.category }}</p>
+          <p class="card-text">Published: {{ blog.createdAt | date }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
-
