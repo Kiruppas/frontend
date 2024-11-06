@@ -1,8 +1,8 @@
-<div class="container mt-4">
-  <h2>Update Blog</h2>
+<div class="container" style="margin-top: 90px; height: 500px">
+  <h2 style="text-align: center; color: #00095b;">UPDATE BLOG</h2>
   <form [formGroup]="updateBlogForm" (ngSubmit)="handleUpdateBlog()">
     <div class="mb-3">
-      <label for="title" class="form-label"><b>Title:</b></label>
+      <label for="title" class="form-label" style="color: #00095b;"><b>TITLE</b></label>
       <input
         type="text"
         class="form-control"
@@ -21,7 +21,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="category" class="form-label"><b>Category:</b></label>
+      <label for="category" class="form-label" style="color: #00095b;"><b>CATEGORY</b></label>
       <select class="form-control" id="category" formControlName="category">
         <option value="" disabled>Select a category</option>
         <option *ngFor="let category of categories" [value]="category">
@@ -37,7 +37,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="content" class="form-label"><b>Content:</b></label>
+      <label for="content" class="form-label" style="color: #00095b;"><b>CONTENT</b></label>
       <textarea
         class="form-control"
         id="content"
@@ -54,15 +54,13 @@
       </div>
     </div>
 
-    <!-- <div *ngIf="isSaved" class="alert alert-success">Saved Successfully</div> -->
-    <!-- <div *ngIf="!isSaved" class="alert alert-danger">Unable to Create Blog. Some error occurred. Try again later.</div> -->
-
     <button
       type="submit"
-      class="btn btn-primary"
+      class="btn btn-outline-light"
+      style="margin-left: 500px;"
       [disabled]="updateBlogForm.invalid"
     >
-      Submit
+      Update
     </button>
   </form>
 </div>

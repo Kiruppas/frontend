@@ -7,14 +7,11 @@ import { MenuListComponent } from '../menu-list/menu-list.component';
   imports: [MenuListComponent],
   template: `
     <footer
-      class="text-center fixed-bottom"
-      style="background-color: antiquewhite;"
-    >
+      class="text-center" style="background-color: rgb(24, 40, 80);">
       <app-menu-list></app-menu-list>
-      <p class="copyright" style="color: black;">
+      <p class="text-light p-4">
         Copyright 2024 | Blog Management
       </p>
-      <br />
     </footer>
   `,
   styles: `

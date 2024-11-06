@@ -28,13 +28,11 @@ export class CreateBlogComponent {
 
     this.addBlogForm = new FormGroup({
       title: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(20),
+        Validators.required
       ]),
       category: new FormControl('', Validators.required),
       content: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
+        Validators.required
       ]),
     });
   }

@@ -6,19 +6,23 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { RegistrationService } from '../service/registration.service';
 import { IUser } from '../models/iuser';
 
-// to check for at least one special character
-const specialCharValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(control.value);
-  return hasSpecialChar ? null : { specialChar: true };
-};
+
+//Custom Validator for special characters
+function specialCharValidator(control: AbstractControl): { [key: string]: boolean } | null {
+  const password = control.value;
+  if (password && !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)) {
+    return { specialChar: true };
+  }
+  return null;
+}
+
+
 
 
 @Component({
@@ -26,16 +30,15 @@ const specialCharValidator: ValidatorFn = (control: AbstractControl): Validation
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
   templateUrl: './registration.component.html',
-  styles: ``,
+  styles: [],
 })
 export class RegistrationComponent {
   addUserForm: FormGroup;
   isSaved = false;
   registrationSuccess = false;
   registrationError = '';
-  // toastr = inject(ToastrService);
 
-  
+
   constructor(
     private registrationService: RegistrationService,
     private toastr: ToastrService
@@ -43,19 +46,17 @@ export class RegistrationComponent {
     this.addUserForm = new FormGroup({
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(6),
-          specialCharValidator,
-        ],
-      }),
+      password: new FormControl('', [
+        Validators.required,
+        specialCharValidator,
+      ]),
     });
   }
 
+
   handleAddUser() {
     if (this.addUserForm.valid) {
-      const user: IUser = this.addUserForm.value; // Get the form data
+      const user: IUser = this.addUserForm.value;
       this.registrationService.registerUser(user).subscribe({
         next: (response: any) => {
           this.registrationSuccess = true;
@@ -75,9 +76,11 @@ export class RegistrationComponent {
     }
   }
 
+
   resetForm() {
-    this.addUserForm.reset(); // Reset the form to its initial state
-    this.registrationSuccess = false; //Reset success flag
+    this.addUserForm.reset();
+    this.registrationSuccess = false;
     this.registrationError = '';
   }
 }
+

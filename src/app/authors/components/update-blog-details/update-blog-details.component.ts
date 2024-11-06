@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MyBlogsService } from '../../service/my-blogs/my-blogs.service';
 import {
   FormGroup,
   FormBuilder,
@@ -12,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable, catchError, of, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { IMyBlog } from '../../models/IMyBlog';
+import { BlogService } from '../../../blogs/service/blogs.service';
 
 
 @Component({
@@ -26,28 +26,28 @@ export class UpdateBlogDetailsComponent implements OnInit {
   blogId!: any;
   isSaved = false;
   errorMessage: string | null = null;
-  blog$: Observable<IMyBlog | null> = of(null);
+  blog: Observable<IMyBlog | null> = of(null);
   categories = ['TECHNOLOGY', 'TRAVEL', 'FOOD', 'SPORTS', 'POLITICS'];
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private myBlogService: MyBlogsService,
+    private blogService: BlogService,
     private toastr: ToastrService
   ) {
     this.updateBlogForm = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(20)]],
+      title: ['', Validators.required],
       category: ['', Validators.required],
-      content: ['', [Validators.required, Validators.minLength(5)]],
+      content: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
     this.blogId = this.route.snapshot.paramMap.get('blogId');
     if (this.blogId !== null) {
-      this.blog$ = this.myBlogService.getBlogById(this.blogId);
-      this.blog$.subscribe({
+      this.blog = this.blogService.getBlog(this.blogId);
+      this.blog.subscribe({
         next: (blog) => {
           if (blog) {
             this.updateBlogForm.patchValue({
@@ -69,14 +69,14 @@ export class UpdateBlogDetailsComponent implements OnInit {
         content: this.updateBlogForm.value.content,
       };
 
-      this.myBlogService.updateBlog(updatedBlog).subscribe({
+      this.blogService.updateBlog(updatedBlog).subscribe({
         next: () => {
           this.isSaved = true;
           console.log('Blog updated successfully!');
           this.toastr.success('Blog updated successfully!', 'Success');
           this.router.navigate(['/blogs']);
         },
-        error: (error) => {
+        error: (error: { message: any; }) => {
           this.errorMessage = `Error updating blog: ${error.message}`;
           this.toastr.error(this.errorMessage, 'Error');
           console.error('Error updating blog:', error);

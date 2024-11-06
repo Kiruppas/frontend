@@ -1,7 +1,7 @@
-import { User } from './user';
+import { User } from './IUser';
 
 export interface Blog {
-  blogId: string;
+  blogId: number;
   title: string;
   user: User;
   category: string;

@@ -9,9 +9,9 @@ import { MenuListComponent } from '../menu-list/menu-list.component';
     <nav class="navbar navbar-expand">
       <div
         class="container-fluid fixed-top"
-        style="background-color: antiquewhite;"
+        style="background-color: rgb(24, 40, 80);"
       >
-        <a class="navbar-brand app-name" href="#">Blog Management</a>
+        <a class="navbar-brand app-name text-white"><b>TheBlogHub</b></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -23,7 +23,7 @@ import { MenuListComponent } from '../menu-list/menu-list.component';
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarText">
+        <div class="collapse navbar-collapse" id="navbarText" style="margin-left: 180px;">
           <app-menu-list></app-menu-list>
         </div>
       </div>
@@ -31,9 +31,9 @@ import { MenuListComponent } from '../menu-list/menu-list.component';
   `,
   styles: `
   .app-name {
-    color: #00095b;
-    padding: 0px 10px;
+   
+    padding: 0px 8px;
 }
-`,
+  `,
 })
 export class HeaderComponent {}

@@ -5,7 +5,7 @@ import { IUser } from '../models/iuser';
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationService {
-  private apiUrl = 'http://localhost:8080/blogbackend/api/users';
+  private apiUrl = 'http://localhost:8080/api/users';
 
   constructor(private http: HttpClient) {}
 

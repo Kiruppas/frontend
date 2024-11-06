@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IMyBlog } from '../../models/IMyBlog';
-import { MyBlogsService } from '../../service/my-blogs/my-blogs.service';
-import { Location } from '@angular/common';
+import { BlogService } from '../../../blogs/service/blogs.service';
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 declare var $: any; // Declare jQuery for Bootstrap modal
 
 @Component({
@@ -16,30 +16,32 @@ declare var $: any; // Declare jQuery for Bootstrap modal
 })
 export class MyBlogsListComponent {
   myBlogs: IMyBlog[] = [];
+  selectedBlogId: number | undefined;
   userId: any;
   blogId: any;
-  blogToDelete: IMyBlog | null = null; // To store the blog to delete
+  blogToDelete: IMyBlog | null = null;
+
+  
 
   constructor(
-    private myBlogService: MyBlogsService,
-    private route: ActivatedRoute,
-    private location: Location,
-    private toastr: ToastrService
+    private blogService: BlogService, private location: Location,
+    private route: ActivatedRoute, private toastr: ToastrService
   ) {
     // Reading the URL param
     this.userId = this.route.snapshot.paramMap.get('userId');
   }
 
   ngOnInit(): void {
-    this.myBlogService
+    this.blogService
       .getMyBlogs(this.userId)
       .subscribe((response: IMyBlog[]) => {
         this.myBlogs = response;
         this.loadBlogs();
       });
   }
+
   loadBlogs(): void {
-    this.myBlogService.getMyBlogs(this.userId).subscribe(
+    this.blogService.getMyBlogs(this.userId).subscribe(
       (response: IMyBlog[]) => {
         this.myBlogs = response;
       },
@@ -60,7 +62,7 @@ export class MyBlogsListComponent {
   }
   confirmDelete(): void {
     if (this.blogToDelete) {
-      this.myBlogService.deleteBlog(this.blogToDelete.blogId).subscribe(
+      this.blogService.deleteBlog(this.blogToDelete.blogId).subscribe(
         () => {
           this.loadBlogs(); // Refresh the list after deletion
           this.closeModal(); // Close the modal
