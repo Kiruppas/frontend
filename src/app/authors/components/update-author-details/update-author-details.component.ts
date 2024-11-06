@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IAuthor } from '../../models/iauthor';
 import {
   FormBuilder,
@@ -8,8 +8,6 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
-
-import { response } from 'express';
 import { Observable, of } from 'rxjs';
 import { AuthorsService } from '../../service/authors/authors.service';
 import { ToastrService } from 'ngx-toastr';
@@ -26,8 +24,10 @@ export class UpdateAuthorDetailsComponent implements OnInit {
   authorID!: any;
   isSaved = false;
   errorMessage: any;
+  // Observable to handle async operations like the Http req to get, update the author details
   author$: Observable<IAuthor | null> = of(null);
 
+  // FormBuilder - helper class to simplify the form creation
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -37,18 +37,19 @@ export class UpdateAuthorDetailsComponent implements OnInit {
   ) {
     this.updateUserForm = this.fb.group({
       username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]], // fields creation
     });
   }
 
+  // to fetch and display data based on userId
   ngOnInit(): void {
-    this.authorID = this.route.snapshot.paramMap.get('userId');
+    this.authorID = this.route.snapshot.paramMap.get('userId'); // retrieving userId
     if (this.authorID !== null) {
       this.author$ = this.authorService.getAuthorById(this.authorID);
       this.author$.subscribe({
         next: (author) => {
           if (author) {
-            this.updateUserForm.patchValue({
+            this.updateUserForm.patchValue({ // updates the form with the author's data
               username: author.username,
               email: author.email,
             });
@@ -64,13 +65,13 @@ export class UpdateAuthorDetailsComponent implements OnInit {
 
   handleUpdateUser(): void {
     if (this.updateUserForm.valid && this.authorID !== null) {
-      const updatedAuthor: Partial<IAuthor> = {
+      const updatedAuthor: Partial<IAuthor> = { // containes subset of properties
         userId: this.authorID,
         username: this.updateUserForm.value.username,
         email: this.updateUserForm.value.email,
       };
 
-      this.authorService.updateAuthor(updatedAuthor).subscribe({
+      this.authorService.updateAuthor(updatedAuthor).subscribe({ // sends http  req to backend to update the data
         next: () => {
           this.isSaved = true;
           console.log('Author updated successfully!');

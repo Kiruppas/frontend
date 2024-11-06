@@ -11,14 +11,24 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthorsComponent } from './authors/components/authors-list/authors-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, MenuListComponent, FooterComponent, HomeComponent,BlogListComponent,BlogDetailsComponent,AboutComponent, 
-    AuthorsComponent, ToastrModule, ReactiveFormsModule],
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    MenuListComponent,
+    FooterComponent,
+    HomeComponent,
+    BlogListComponent,
+    BlogDetailsComponent,
+    AboutComponent,
+    AuthorsComponent,
+    ToastrModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'frontend';
