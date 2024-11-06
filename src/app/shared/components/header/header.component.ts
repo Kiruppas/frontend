@@ -11,7 +11,7 @@ import { MenuListComponent } from '../menu-list/menu-list.component';
         class="container-fluid fixed-top"
         style="background-color: rgb(24, 40, 80);"
       >
-        <a class="navbar-brand app-name text-white" href="#"><b>TheBlogHub</b></a>
+        <a class="navbar-brand app-name text-white"><b>TheBlogHub</b></a>
         <button
           class="navbar-toggler"
           type="button"
