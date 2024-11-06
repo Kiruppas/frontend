@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BlogService } from '../../service/blogs.service';
-import { BlogSummary } from '../../interface/blog-summary';
+import { BlogSummary } from '../../models/IBlogSummary';
 import { Router } from '@angular/router';
 
 @Component({

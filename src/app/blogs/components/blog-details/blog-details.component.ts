@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Blog } from '../../interface/blogs';
+import { Blog } from '../../models/IBlogs';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from '../../service/blogs.service';
 import { CommonModule } from '@angular/common';
@@ -35,6 +35,7 @@ export class BlogDetailsComponent {
     if (blogId) {
       this.blogService.getBlog(blogId).subscribe((data) => {
         this.blog = data;
+        console.log(this.blog);
         if (this.blog) {
           // Convert the createdAt string to a Date object
           this.blog.createdAt = new Date(

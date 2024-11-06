@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { IAuthor } from '../../models/iauthor';
+import { IAuthor } from '../../models/IAuthor';
 import { AuthorsService } from '../../service/authors/authors.service';
 
 @Component({

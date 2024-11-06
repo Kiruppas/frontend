@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IAuthor } from '../../models/iauthor';
+import { IAuthor } from '../../models/IAuthor';
 import {
   FormBuilder,
   FormGroup,
@@ -11,6 +11,7 @@ import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { AuthorsService } from '../../service/authors/authors.service';
 import { ToastrService } from 'ngx-toastr';
+import { log } from 'console';
 
 @Component({
   selector: 'app-update-author-details',
@@ -25,7 +26,7 @@ export class UpdateAuthorDetailsComponent implements OnInit {
   isSaved = false;
   errorMessage: any;
   // Observable to handle async operations like the Http req to get, update the author details
-  author$: Observable<IAuthor | null> = of(null);
+  author: Observable<IAuthor | null> = of(null);
 
   // FormBuilder - helper class to simplify the form creation
   constructor(
@@ -45,8 +46,9 @@ export class UpdateAuthorDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.authorID = this.route.snapshot.paramMap.get('userId'); // retrieving userId
     if (this.authorID !== null) {
-      this.author$ = this.authorService.getAuthorById(this.authorID);
-      this.author$.subscribe({
+      this.author = this.authorService.getAuthorById(this.authorID);
+      console.log(this.author)
+      this.author.subscribe({
         next: (author) => {
           if (author) {
             this.updateUserForm.patchValue({ // updates the form with the author's data

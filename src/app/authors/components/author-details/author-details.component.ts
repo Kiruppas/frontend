@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthorsService } from '../../service/authors/authors.service';
-import { UpdateAuthorDetailsComponent } from '../update-author-details/update-author-details.component';
-import { IAuthor } from '../../models/iauthor';
+import { IAuthor } from '../../models/IAuthor';
+import { ToastrService } from 'ngx-toastr'; // Import ToastrService
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,22 +10,50 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterModule, CommonModule],
   templateUrl: './author-details.component.html',
-  styles: ``,
+  styles: [],
 })
-export class AuthorDetailsComponent {
+export class AuthorDetailsComponent implements OnInit {
   userId: any;
-  author: any;
+  author: IAuthor | null = null; // Use IAuthor for better type safety
+  isLoading: boolean = true; // Add loading indicator
 
   constructor(
     private authorService: AuthorsService,
-    private route: ActivatedRoute
-  ) {
-    this.userId = this.route.snapshot.paramMap.get('userId');
-  }
+    private route: ActivatedRoute,
+    private router: Router,
+    private toastr: ToastrService // Inject ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.authorService.getAuthorById(this.userId).subscribe((response: any) => {
-      this.author = response;
-    });
+    this.userId = this.route.snapshot.paramMap.get('userId');
+    if (this.userId) {
+      this.authorService.getAuthorById(this.userId).subscribe({
+        next: (response: IAuthor) => {
+          this.author = response;
+          this.isLoading = false;
+        },
+        error: (error) => {
+          this.toastr.error('Error fetching author details.', 'Error'); // Handle errors
+          this.isLoading = false;
+        }
+      });
+    } else {
+      this.isLoading = false;
+      this.toastr.warning('Invalid user ID.', 'Warning'); // Handle invalid userId
+    }
+  }
+
+  deleteAuthor(): void {
+    if (this.userId) {
+      this.authorService.deleteAuthorById(this.userId).subscribe({
+        next: () => {
+          this.toastr.success('User deleted successfully', 'Success');
+          this.router.navigate(['/authors']);
+        },
+        error: (error) => {
+          this.toastr.error('Error deleting author.', 'Error'); // Handle errors
+        }
+      });
+    }
   }
 }

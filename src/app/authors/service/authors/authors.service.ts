@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IAuthor } from '../../models/iauthor';
+import { IAuthor } from '../../models/IAuthor';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthorsService {
-  private apiUrl = 'http://localhost:8080/blogbackend/api/users';
+  private apiUrl = 'http://localhost:8080/api/users';
 
   constructor(private http: HttpClient) {}
 

@@ -1,42 +1,31 @@
-<h4 style="text-align: center; margin-top: 90px; color: #00095b">
-  Hi {{ author?.username }}, Welcome to your page !
-</h4>
-<div
-  class="container d-flex justify-content-center align-items-center"
-  style="margin-top: 40px"
->
-  <div class="card w-50" style="margin-bottom: 70px;">
-    <div class="card-body">
-      <p class="card-text"><b>Username : </b>{{ author?.username }}</p>
-      <p></p>
-      <p class="card-text"><b>Email : </b>{{ author?.email }}</p>
-      <div class="d-flex justify-content-center align-items-center">
-        <a
-          routerLink="/authors/edit/{{ userId }}"
-          class="btn btn-primary pe-4 ps-4"
-          >Edit</a
-        >
-        <a
-          routerLink="/authors/delete/{{ userId }}"
-          class="btn btn-danger ms-4 pe-3 ps-3"
-          >Delete</a
-        >
+<div style="height: 500px">
+  <div *ngIf="isLoading; else authorDetails">
+    <p>Loading...</p> </div>
+
+  <ng-template #authorDetails>
+    <div *ngIf="author; else noUserFound">
+      <h4 style="text-align: center; margin-top: 90px; color: #00095b">
+        Hi {{ author.username }}, Welcome to your page!
+      </h4>
+      <div class="container d-flex justify-content-center align-items-center" style="margin-top: 40px">
+        <div class="card w-50" style="margin-bottom: 70px">
+          <div class="card-body">
+            <p class="card-text"><b>Username : </b>{{ author.username }}</p>
+            <p class="card-text"><b>Email : </b>{{ author.email }}</p>
+            <div class="d-flex justify-content-center align-items-center">
+              <a routerLink="/authors/edit/{{ userId }}" class="btn btn-primary pe-4 ps-4">Edit</a>
+              <button (click)="deleteAuthor()" class="btn btn-danger ms-4 pe-3 ps-3">Delete</button> </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 90px">
+        <a routerLink="/blogs/create/{{ userId }}" class="btn btn-outline-light" style="margin-top: 60px; margin-right: 30px">Create My Blog</a>
+        <a routerLink="/blogs/user/{{ userId }}" class="btn btn-outline-light" style="margin-top: 60px">View My Blogs</a>
       </div>
     </div>
-  </div>
-</div>
-<div class="d-flex justify-content-center align-items-center" style="margin-bottom: 90px;">
-  <a
-    routerLink="/blogs/{{ userId }}"
-    class="btn btn-outline-light"
-    style="margin-top: 60px; margin-right: 30px"
-    >Create My Blog</a
-  >
-  <a
-    routerLink="/blogs/user/{{ userId }}"
-    class="btn btn-outline-light"
-    style="margin-top: 60px"
-    >View My Blogs</a
-  >
-  
+
+    <ng-template #noUserFound>
+      <h4 style="text-align: center; margin-top: 100px; color: #00095b">No user found!</h4>
+    </ng-template>
+  </ng-template>
 </div>

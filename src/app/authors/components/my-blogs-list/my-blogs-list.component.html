@@ -1,4 +1,5 @@
-<div style="height: 500px;">
+<div style="height: 500px">
+  
   <div class="row mt-4" *ngIf="myBlogs.length > 0; else noBlogs">
     <div
       class="col-sm-4 mb-3 mb-sm-0"
@@ -16,24 +17,65 @@
               >Edit</a
             >
             <a
-              href="#"
-              class="btn btn-danger ms-4 pe-3 ps-3"
-              (click)="deleteBlog(myBlog.blogId); $event.preventDefault()"
-              >Delete</a
-            >
-          </div>
+            href="#"
+            class="btn btn-danger ms-4 pe-3 ps-3"
+            (click)="openDeleteModal(myBlog); $event.preventDefault()"
+            >Delete</a
+          >
         </div>
       </div>
-      <br *ngIf="(i + 1) % 3 === 0" />
+    </div>
+    <br *ngIf="(i + 1) % 3 === 0" />
+  </div>
+</div>
+
+<ng-template #noBlogs>
+  <h4 class="text-danger" style="margin-top: 50px; text-align: center">
+    No blogs have been posted yet by you!
+  </h4>
+</ng-template>
+
+<!-- Bootstrap Modal for Deletion Confirmation -->
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete the blog titled "{{
+          blogToDelete?.title
+        }}"?
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="closeModal()"
+        >
+          Cancel
+        </button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">
+          Delete
+        </button>
+      </div>
     </div>
   </div>
-
-  <ng-template #noBlogs>
-    <h4 style="margin-top: 100px; text-align: center; color: #00095b">
-      No blogs have been posted yet by you!
-    </h4>
-  </ng-template>
-
-  <app-delete-blog [blogId]="selectedBlogId" #deleteComponent></app-delete-blog>
-  <!-- access the child component -->
 </div>

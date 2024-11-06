@@ -1,4 +1,4 @@
-import { User } from './user';
+import { User } from './IUser';
 
 export interface BlogSummary {
   blogId: string;
